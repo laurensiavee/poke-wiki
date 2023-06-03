@@ -1,6 +1,7 @@
 import React from 'react'
+import Pokeapi from './Pokeapi'
 
-export default function Info() {
+export default function Info(pokemon) {
   
   return (
     <div>
@@ -26,7 +27,7 @@ export default function Info() {
                         {/* col 2-3 desc */}
                         <div class="col-span-2 bg-gray-800/75 rounded-lg py-5 px-2">
                             <div class="px-5">
-                                <h1 class="text-white">test1: namd</h1>
+                                <h1 class="text-white">test1: nassmd</h1>
                             </div>
                         </div>
                     </div>

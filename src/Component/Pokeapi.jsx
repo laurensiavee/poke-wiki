@@ -1,4 +1,6 @@
 const getPokemonData  = async (pokemon) =>{
+    console.log("get")
+    console.log(pokemon)
     try{
         const respond = await fetch((`https://pokeapi.co/api/v2/pokemon/${pokemon}`))
         if(!respond.ok){
@@ -12,7 +14,11 @@ const getPokemonData  = async (pokemon) =>{
 }
 
 const displayPokemonData = async(pokemon) =>{
-    const pokemonData = await getPokemonData(pokemon)
+    console.log(pokemon.pokemon)
+
+    const pokemonData = await getPokemonData(pokemonName)
+    console.log("return")
+
     if(pokemonData){
         const {sprites} = pokemonData
         const {other} = pokemonData
@@ -23,7 +29,7 @@ const displayPokemonData = async(pokemon) =>{
    
     return (
         <div>
-            
+            <h1 class="bg-red-500 text-white">tes</h1>
         </div>
     );
 }
