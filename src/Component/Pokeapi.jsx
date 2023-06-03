@@ -1,38 +1,60 @@
-const getPokemonData  = async (pokemon) =>{
-    console.log("get")
-    console.log(pokemon)
-    try{
-        const respond = await fetch((`https://pokeapi.co/api/v2/pokemon/${pokemon}`))
-        if(!respond.ok){
-            throw new Error
-        }
-        const pokemonData = await respond.json()
-        return pokemonData
-    }catch(e){
-        alert('No Pokemon Data Could Be Found With That Name')
+import React, { useEffect,useState } from 'react';
+import Info from './Info';
+
+const getPokemonData = async (pokemon) => {
+  console.log("get");
+  console.log(`This Is Pokemon ${pokemon}`);
+  try {
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`);
+    if (!response.ok) {
+      throw new Error();
     }
-}
+    const pokemonData = await response.json();
+    return pokemonData;
+  } catch (e) {
+    setTimeout(() => {
+      alert('No Pokemon Data Could Be Found With That Name');
+    }, 1000);
+  }
+};
 
-const displayPokemonData = async(pokemon) =>{
-    console.log(pokemon.pokemon)
+const DisplayPokemonData = ({ pokemon }) => {
+    const [imgDefaultPokemons,setImgDefaultPokemon] = useState('')
+    const [pokemonName,setPokemonName] = useState('')
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const pokemonData = await getPokemonData(pokemon);
+        console.log("return");
 
-    const pokemonData = await getPokemonData(pokemonName)
-    console.log("return")
+        if (pokemonData) {
+          const {species} = pokemonData
+          const { sprites } = pokemonData;
+          console.log(sprites)
+          const imgDefaultPokemon = sprites.other['official-artwork'].front_default
+          console.log(imgDefaultPokemon)
+          const imgShinyPokemon = sprites.other['official-artwork']['front_shiny'];
+          const types = pokemonData.types;
+          const pokeName = species.name
+          // Do something with the retrieved data
+          console.log(imgDefaultPokemon, imgShinyPokemon, types);
+          setImgDefaultPokemon(imgDefaultPokemon)
+          setPokemonName(pokeName)
+          console.log(imgDefaultPokemons)
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-    if(pokemonData){
-        const {sprites} = pokemonData
-        const {other} = pokemonData
-        const imgDefaultPokemon = other['official-artwork']['front-default']
-        const imgShinyPokemon = other['official-artwork']['front-shiny']
-        const types = types
-    } 
-   
-    return (
-        <div>
-            <h1 class="bg-red-500 text-white">tes</h1>
-        </div>
-    );
-}
+    fetchData();
+  }, [pokemon]);
 
+  return (
+    <div>
+      <Info imgDefaultPokemon = {imgDefaultPokemons} pokemonName={pokemonName} />
+    </div>
+  );
+};
 
-export default displayPokemonData
+export default DisplayPokemonData;

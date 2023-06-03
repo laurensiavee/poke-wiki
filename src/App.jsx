@@ -7,8 +7,7 @@ function App() {
   const [pokemonName, setPokemonName] = useState()
 
   function handleSubmit(e) {
-    // alert('A name was submitted: ' + e.target[0].value);
-    setPokemonName(e.target[0].value)
+    setPokemonName(e.target[0].value.toLowerCase())
     e.target[0].value = ""
     e.preventDefault();
     console.log(pokemonName)
@@ -19,13 +18,13 @@ function App() {
     <div>
       {/* search bar */}
       <section class="p-5 mt-9">
-        <div class="ms-0 mb-5">
-          <h2 class="text-2xl text-center text-white roboto"><b>Search Pokemon</b></h2>
-          <div class="py-5">
-            <div class="px-9">
-              <form class="text-center" onSubmit={handleSubmit} >
+        <div className="ms-0 mb-5">
+          <h2 className="text-2xl text-center text-white roboto"><b>Search Pokemon</b></h2>
+          <div className="py-5">
+            <div className="px-9">
+              <form className="text-center" onSubmit={handleSubmit} >
                 <input type="text" id="search-bar" placeholder="Search" aria-label="Search" 
-                  class="block w-full p-2 border border-gray-300 rounded-lg" 
+                  className="block w-full p-2 border border-gray-300 rounded-lg" 
                   />
               </form>
             </div>
@@ -37,7 +36,7 @@ function App() {
       {pokemonName && <Pokeapi pokemon={pokemonName}/>}
       
       {/* <Pokeapi pokemon="pikachu"/> */}
-      <Info />
+      {/* <Info /> */}
     </div>
   );
 }
