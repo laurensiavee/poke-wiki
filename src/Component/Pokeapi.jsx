@@ -19,28 +19,28 @@ const getPokemonData = async (pokemon) => {
 };
 
 const DisplayPokemonData = ({ pokemon }) => {
-    const [imgDefaultPokemons,setImgDefaultPokemon] = useState('')
-    const [pokemonName,setPokemonName] = useState('')
+  const [pokemonData,setPokemonData] = useState(null)
   useEffect(() => {
     const fetchData = async () => {
+      
       try {
-        const pokemonData = await getPokemonData(pokemon);
-        console.log("return");
-
-        if (pokemonData) {
-          const {species} = pokemonData
-          const { sprites } = pokemonData;
+        const data = await getPokemonData(pokemon);
+        if (data) {
+          const {species,sprites} = data
           console.log(sprites)
           const imgDefaultPokemon = sprites.other['official-artwork'].front_default
           console.log(imgDefaultPokemon)
           const imgShinyPokemon = sprites.other['official-artwork']['front_shiny'];
-          const types = pokemonData.types;
+          const types = data.types;
           const pokeName = species.name
-          // Do something with the retrieved data
-          console.log(imgDefaultPokemon, imgShinyPokemon, types);
-          setImgDefaultPokemon(imgDefaultPokemon)
-          setPokemonName(pokeName)
-          console.log(imgDefaultPokemons)
+          
+          const pokemonData = {
+            imgDefaultPokemon : imgDefaultPokemon,
+            imgShinyPokemon : imgShinyPokemon,
+            pokemonName : pokeName,
+            types: types
+          };
+          setPokemonData(pokemonData)
         }
       } catch (error) {
         console.error(error);
@@ -50,9 +50,10 @@ const DisplayPokemonData = ({ pokemon }) => {
     fetchData();
   }, [pokemon]);
 
+  
   return (
     <div>
-      <Info imgDefaultPokemon = {imgDefaultPokemons} pokemonName={pokemonName} />
+      {pokemonData && <Info {...pokemonData} />}
     </div>
   );
 };
