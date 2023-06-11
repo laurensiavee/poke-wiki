@@ -25,6 +25,8 @@ const DisplayPokemonData = ({ pokemon }) => {
       
       try {
         const data = await getPokemonData(pokemon);
+        console.log("data:")
+        console.log(data)
         if (data) {
           const {species,sprites} = data
           console.log(sprites)
@@ -33,12 +35,25 @@ const DisplayPokemonData = ({ pokemon }) => {
           const imgShinyPokemon = sprites.other['official-artwork']['front_shiny'];
           const types = data.types;
           const pokeName = species.name
+
+          const pokeDex = data.id
+          const height = data.height
+          const weight = data.weight
+          const abilities = data.abilities
+          const moves = data.moves
+          const stats = data.stats
           
           const pokemonData = {
             imgDefaultPokemon : imgDefaultPokemon,
             imgShinyPokemon : imgShinyPokemon,
             pokemonName : pokeName,
-            types: types
+            types: types,
+            pokeDex : pokeDex,
+            height : height,
+            weight : weight,
+            abilities : abilities,
+            moves : moves,
+            stats : stats
           };
           setPokemonData(pokemonData)
         }
