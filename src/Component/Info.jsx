@@ -32,9 +32,10 @@ export default function Info(pokemonData) {
                             <div class="px-5">
                                 <h1 class="text-white"><b>height: </b>{pokemonData.height}</h1>
                                 <h1 class="text-white"><b>weight: </b>{pokemonData.weight}</h1>
-                                <h1 class="text-white">abilities: nassmd</h1>
-                                <h1 class="text-white">moves: nassmd</h1>
-                                <h1 class="text-white">stats: nassmd</h1>
+                            </div>
+                            <div class="px-5">
+                                <h1 class="text-white"><b>height: </b>{pokemonData.height}</h1>
+                                <h1 class="text-white"><b>weight: </b>{pokemonData.weight}</h1>
                             </div>
                         </div>
                         
