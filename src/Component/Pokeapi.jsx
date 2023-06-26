@@ -22,38 +22,34 @@ const DisplayPokemonData = ({ pokemon }) => {
   const [pokemonData,setPokemonData] = useState(null)
   useEffect(() => {
     const fetchData = async () => {
-      
       try {
         const data = await getPokemonData(pokemon);
         console.log("data:")
         console.log(data)
+        console.log(data.id)
         if (data) {
-          const {species,sprites} = data
+          const {species,sprites, game_indices} = data
           console.log(sprites)
           const imgDefaultPokemon = sprites.other['official-artwork'].front_default
           console.log(imgDefaultPokemon)
           const imgShinyPokemon = sprites.other['official-artwork']['front_shiny'];
           const types = data.types;
           const pokeName = species.name
-
-          const pokeDex = data.id
-          const height = data.height
-          const weight = data.weight
-          const abilities = data.abilities
-          const moves = data.moves
-          const stats = data.stats
-          
+          const pokedex = data.id
+          const backdefault = sprites.back_default
+          const frontdefault = sprites.front_default
+          const backshiny = sprites.back_shiny
+          const frontshiny = sprites.front_shiny
           const pokemonData = {
             imgDefaultPokemon : imgDefaultPokemon,
             imgShinyPokemon : imgShinyPokemon,
             pokemonName : pokeName,
             types: types,
-            pokeDex : pokeDex,
-            height : height,
-            weight : weight,
-            abilities : abilities,
-            moves : moves,
-            stats : stats
+            pokedex : pokedex,
+            frontdefault :frontdefault,
+            backdefault : backdefault,
+            frontshiny : frontshiny,
+            backshiny : backshiny
           };
           setPokemonData(pokemonData)
         }
